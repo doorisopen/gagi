@@ -20,7 +20,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SessionMember session_member = (SessionMember) request.getSession().getAttribute("SESSION_MEMBER");
-        if (isGet(request)) {
+        if (isExcludePath(request)) {
             return true;
         }
         if (session_member == null) {
@@ -31,8 +31,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    private boolean isGet(HttpServletRequest request) {
+    private boolean isExcludePath(HttpServletRequest request) {
         return (request.getRequestURI().equals("/api/v1.0/items")) && (request.getMethod().equals("GET")) ||
-                (request.getRequestURI().equals("/api/v1.0/members")) && (request.getMethod().equals("GET"));
+                (request.getRequestURI().equals("/api/v1.0/members")) && (request.getMethod().equals("POST"));
     }
 }
