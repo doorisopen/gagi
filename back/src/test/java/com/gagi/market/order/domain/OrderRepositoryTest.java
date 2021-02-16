@@ -59,7 +59,7 @@ class OrderRepositoryTest {
         itemRepository.save(item);
 
         //when
-        Order order = Order.createOrder(buyer, item);
+        Order order = Order.createOrder(item, buyer);
 
         //then
         assertThat(order.getStatus()).isEqualTo(OrderStatus.ORDER);
@@ -82,7 +82,7 @@ class OrderRepositoryTest {
                 .build();
         item.setMember(seller);
         itemRepository.save(item);
-        Order order = Order.createOrder(buyer, item);
+        Order order = Order.createOrder(item, buyer);
         //when
         order.cancelOrder();
 
