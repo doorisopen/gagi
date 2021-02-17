@@ -47,6 +47,9 @@ public class OrderApiController {
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> findOrderByIdAndMember(@LoginMember SessionMember member,
                                                                    @PathVariable long orderId) {
+        if (!orderService.checkPermissionOfOrder(orderId, member.getMemberEmail())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         OrderResponseDto findOrder = of(orderService.findOrderByIdAndMember(orderId, member.getMemberEmail()));
         return ResponseEntity
                 .ok()
