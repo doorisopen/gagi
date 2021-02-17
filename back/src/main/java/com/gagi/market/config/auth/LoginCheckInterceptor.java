@@ -11,7 +11,8 @@ import java.util.List;
 public class LoginCheckInterceptor implements HandlerInterceptor {
     public List<String> pathPatters = Arrays.asList(
             "/api/v1.0/items/**",
-            "/api/v1.0/members/**");
+            "/api/v1.0/members/**",
+            "/api/v1.0/orders/**");
     public List<String> excludePathPatters = Arrays.asList(
             "/api/v1.0/items/search",
             "/api/v1.0/members/login",
