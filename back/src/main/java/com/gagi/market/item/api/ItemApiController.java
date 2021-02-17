@@ -30,7 +30,7 @@ public class ItemApiController {
     @GetMapping
     public ResponseEntity<Page<ItemResponseDto>> findItems(Pageable pageable) {
         Page<ItemResponseDto> findItems = itemService.findItems(pageable)
-                .map(ItemResponseDto::new);
+                .map(ItemResponseDto::of);
         return ResponseEntity
                 .ok()
                 .body(findItems);
@@ -47,7 +47,7 @@ public class ItemApiController {
     @GetMapping("/search")
     public ResponseEntity<Page<ItemResponseDto>> findItemsByItemNameContains(@RequestParam("itemName") String itemName, Pageable pageable) {
         Page<ItemResponseDto> findItems = itemService.findItemsByItemNameContains(itemName, pageable)
-                .map(ItemResponseDto::new);
+                .map(ItemResponseDto::of);
         return ResponseEntity
                 .ok()
                 .body(findItems);
