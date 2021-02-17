@@ -29,7 +29,7 @@ public class ReservationOrderService implements OrderService {
     public Order createOrder(long itemId, String memberEmail) {
         Item findItem = itemRepository.findById(itemId).get();
         Member findMember = memberRepository.findMemberByMemberEmail(memberEmail).get();
-        return Order.createOrder(findItem, findMember);
+        return orderRepository.save(Order.createOrder(findItem, findMember));
     }
 
     @Override

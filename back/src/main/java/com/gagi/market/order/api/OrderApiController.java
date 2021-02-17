@@ -30,7 +30,7 @@ public class OrderApiController {
 
     @PostMapping
     public ResponseEntity<OrderResponseDto> createOrder(@LoginMember SessionMember member,
-                                      @RequestBody OrderRequestDto requestDto) {
+                                                        @RequestBody OrderRequestDto requestDto) {
         Order order = orderService.createOrder(requestDto.getItemId(), member.getMemberEmail());
         return ResponseEntity
                 .created(URI.create(ORDER_API_URI + "/" + order.getOrderId()))
