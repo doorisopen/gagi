@@ -49,4 +49,13 @@ public class ReservationOrderService implements OrderService {
         Order findOrder = orderRepository.findById(orderId).get();
         findOrder.cancelOrder();
     }
+
+    public boolean checkPermissionOfOrder(Long orderId, String memberEmail) {
+        Member findMember = memberRepository.findMemberByMemberEmail(memberEmail).orElse(null);
+        Order findOrder = orderRepository.findById(orderId).orElse(null);
+        return findOrder
+                .getMember()
+                .getMemberEmail()
+                .equals(findMember.getMemberEmail());
+    }
 }

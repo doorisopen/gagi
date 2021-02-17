@@ -9,4 +9,5 @@ public interface OrderService {
     List<Order> findOrdersByMember(String memberEmail);
     Order findOrderByIdAndMember(long orderId, String memberEmail);
     void cancelOrder(long orderId);
+    boolean checkPermissionOfOrder(Long orderId, String memberEmail);
 }
