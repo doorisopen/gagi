@@ -24,7 +24,7 @@ public class Item {
     private LocalDateTime registerDate;
     private LocalDateTime updateDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
