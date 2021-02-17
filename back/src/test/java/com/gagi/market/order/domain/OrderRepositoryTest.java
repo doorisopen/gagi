@@ -65,7 +65,7 @@ class OrderRepositoryTest {
         orderRepository.save(order);
 
         //then
-        assertThat(order.getStatus()).isEqualTo(OrderStatus.ORDER);
+        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER);
         assertThat(order.getItem().getItemName()).isEqualTo(item.getItemName());
         assertThat(order.getMember().getMemberEmail()).isEqualTo(buyer.getMemberEmail());
     }
@@ -91,7 +91,7 @@ class OrderRepositoryTest {
         order.cancelOrder();
 
         //then
-        assertThat(order.getStatus()).isEqualTo(OrderStatus.CANCEL);
+        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.CANCEL);
         assertThat(order.getItem().getItemName()).isEqualTo(item.getItemName());
         assertThat(order.getMember().getMemberEmail()).isEqualTo(buyer.getMemberEmail());
     }
@@ -119,7 +119,7 @@ class OrderRepositoryTest {
 
         //then
         assertThat(findOrders.size()).isEqualTo(10);
-        assertThat(findOrders.get(0).getStatus()).isEqualTo(OrderStatus.ORDER);
+        assertThat(findOrders.get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER);
         assertThat(findOrders.get(0).getMember().getMemberEmail()).isEqualTo(buyer.getMemberEmail());
     }
 
@@ -143,7 +143,7 @@ class OrderRepositoryTest {
         Order findOrder = orderRepository.findOrderByOrderIdAndMember(order.getOrderId(), buyer).get();
 
         //then
-        assertThat(findOrder.getStatus()).isEqualTo(OrderStatus.ORDER);
+        assertThat(findOrder.getOrderStatus()).isEqualTo(OrderStatus.ORDER);
         assertThat(findOrder.getMember().getMemberEmail()).isEqualTo(buyer.getMemberEmail());
         assertThat(findOrder.getItem().getItemName()).isEqualTo("가지10kg");
         assertThat(findOrder.getItem().getItemPrice()).isEqualTo(10000);

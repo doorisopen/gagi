@@ -27,7 +27,7 @@ public class Order {
     private Member member;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderStatus orderStatus;
 
     private LocalDateTime orderDate;
 
@@ -45,13 +45,13 @@ public class Order {
         Order order = new Order();
         order.setMember(member);
         order.setItem(item);
-        order.setStatus(OrderStatus.ORDER);
+        order.setOrderStatus(OrderStatus.ORDER);
         order.setOrderDate(LocalDateTime.now());
         return order;
     }
 
     //==비즈니스 로직==//
     public void cancelOrder() {
-        this.setStatus(OrderStatus.CANCEL);
+        this.setOrderStatus(OrderStatus.CANCEL);
     }
 }
