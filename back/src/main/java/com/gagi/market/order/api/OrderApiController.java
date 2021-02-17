@@ -4,11 +4,13 @@ import com.gagi.market.config.auth.LoginMember;
 import com.gagi.market.member.api.dto.SessionMember;
 import com.gagi.market.order.api.dto.OrderRequestDto;
 import com.gagi.market.order.api.dto.OrderResponseDto;
+import com.gagi.market.order.domain.Order;
 import com.gagi.market.order.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +29,12 @@ public class OrderApiController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createOrder(@LoginMember SessionMember member,
+    public ResponseEntity<OrderResponseDto> createOrder(@LoginMember SessionMember member,
                                       @RequestBody OrderRequestDto requestDto) {
-        orderService.createOrder(requestDto.getItemId(), member.getMemberEmail());
-        return ResponseEntity.ok().build();
+        Order order = orderService.createOrder(requestDto.getItemId(), member.getMemberEmail());
+        return ResponseEntity
+                .created(URI.create(ORDER_API_URI + "/" + order.getOrderId()))
+                .body(OrderResponseDto.of(order));
     }
 
     @GetMapping
