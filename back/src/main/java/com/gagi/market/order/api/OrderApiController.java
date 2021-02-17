@@ -60,7 +60,7 @@ public class OrderApiController {
                 .body(findOrder);
     }
 
-    @GetMapping("/cancel/{orderId}")
+    @GetMapping("/{orderId}/cancel")
     public ResponseEntity<HttpStatus> cancelOrder(@LoginMember SessionMember member,
                                                   @PathVariable long orderId) {
         if (!orderService.checkPermissionOfOrder(orderId, member.getMemberEmail())) {
